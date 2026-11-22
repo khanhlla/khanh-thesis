@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Khảo sát người tiêu dùng · Consumer survey</title>
+<style>
+:root{--bg:#fbfbfd;--ink:#1d1d1f;--mute:#6e6e73;--soft:#f2f2f5;--line:#e5e5ea;--acc:#8a1f3f;--err:#c0392b;--g:linear-gradient(135deg,#6a1530,#b0325a);--t1:#5a1027;--t2:#a3294d;--t3:#d0607f;--glow:rgba(176,50,90,.12);color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b0b0d;--ink:#f5f5f7;--mute:#a1a1a6;--soft:#1c1c1e;--line:#2c2c2e;--acc:#e0728f;--err:#ff7b6b;--g:linear-gradient(135deg,#7a1f3a,#b8345f);--t1:#c24468;--t2:#ee8aa6;--t3:#ffc2d1;--glow:rgba(184,52,95,.22);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0b0b0d;--ink:#f5f5f7;--mute:#a1a1a6;--soft:#1c1c1e;--line:#2c2c2e;--acc:#e0728f;--err:#ff7b6b;--g:linear-gradient(135deg,#7a1f3a,#b8345f);--t1:#c24468;--t2:#ee8aa6;--t3:#ffc2d1;--glow:rgba(184,52,95,.22);color-scheme:dark}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 90px)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 -apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(45vmax 45vmax at 15% 0%,var(--glow),transparent 62%),radial-gradient(40vmax 40vmax at 95% 100%,var(--glow),transparent 62%);animation:drift 18s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate3d(-4%,3%,0) scale(1.1)}}
+header{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:9;padding:10px 20px 8px}
+.bar{max-width:720px;margin:0 auto}.row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.logo{font-weight:600;font-size:14px;color:var(--mute)}
+.lang{background:var(--soft);border-radius:99px;padding:3px;display:inline-flex}.lang button{border:0;background:none;color:var(--mute);padding:4px 11px;font-size:12px;border-radius:99px;cursor:pointer;transition:all .25s}.lang .on{background:var(--g);color:#fff}
+.prog{height:3px;background:var(--line);border-radius:9px;margin-top:10px;overflow:hidden}.prog i{display:block;height:100%;background:linear-gradient(90deg,var(--t2),var(--t1));transition:width .5s cubic-bezier(.2,.8,.2,1)}
+.pl{font-size:12px;color:var(--mute);margin-top:5px;text-align:center;min-height:18px}
+main{max-width:640px;margin:0 auto;padding:28px 20px 70px;text-align:center}
+h1,h2,.bq{background:linear-gradient(90deg,var(--t1),var(--t2),var(--t3),var(--t2),var(--t1));background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shift 9s linear infinite;letter-spacing:-.02em}
+@keyframes shift{to{background-position:200% center}}
+h1{font-size:clamp(34px,9vw,52px);line-height:1.08;margin:18px 0 18px;font-weight:700}h2{font-size:clamp(28px,7vw,38px);line-height:1.12;margin:12px 0 14px;font-weight:700}
+.bq{font-size:clamp(23px,5.6vw,30px);line-height:1.3;margin:8px 0 32px;font-weight:600}
+.en{display:block;color:var(--mute);-webkit-text-fill-color:var(--mute);font-size:.62em;font-weight:400;font-style:normal;margin-top:.35em;letter-spacing:0}
+p{color:var(--mute);margin:0 0 14px}b{color:var(--ink);font-weight:600}
+.tag{display:inline-block;font-size:13px;font-weight:600;color:var(--acc);margin-bottom:10px}
+.stem{color:var(--mute);margin:4px 0 22px;font-size:17px}.stem .en{font-size:.88em}
+.note{background:var(--soft);padding:14px 18px;border-radius:18px;margin:12px 0 18px;font-size:15px;color:var(--mute);text-align:left}
+.who{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:10px 0;margin:22px 0;font-size:15px;text-align:left}.who p{margin:8px 0}
+.pills{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:18px 0 26px}.pills span{background:var(--soft);border-radius:99px;padding:5px 14px;font-size:13px;color:var(--mute)}
+.dots{display:flex;gap:8px}.dots button{flex:1;min-width:0;height:56px;border-radius:16px;border:0;background:var(--soft);color:var(--ink);font-size:18px;cursor:pointer;transition:background .25s,transform .15s,color .25s}
+.dots button:hover{background:var(--line)}.dots button.on{background:var(--g);color:#fff;font-weight:600}
+.anc,.bip{display:flex;justify-content:space-between;gap:12px;font-size:13px;color:var(--mute);text-align:left}.anc span:last-child,.bip span:last-child{text-align:right}.bip{font-size:16px;color:var(--ink);font-weight:600;margin:0 0 18px}.big{margin:8px 0 22px}
+.opt{display:block;width:100%;text-align:center;margin:10px 0;padding:16px 18px;border-radius:16px;border:0;background:var(--soft);color:var(--ink);font-size:17px;cursor:pointer;transition:background .25s,transform .15s}.opt:hover{background:var(--line)}.opt.on{background:var(--g);color:#fff}.opt .en{color:inherit;-webkit-text-fill-color:currentColor;opacity:.7}
+.go{display:block;width:100%;max-width:340px;margin:26px auto 0;padding:15px;border:0;border-radius:99px;background:var(--g);color:#fff;font-size:17px;font-weight:600;cursor:pointer;box-shadow:0 8px 24px var(--glow);transition:opacity .25s,transform .15s,filter .25s}.go:not(:disabled):hover{filter:brightness(1.1)}.go:not(:disabled):active{transform:scale(.97)}.go:disabled{opacity:.3;cursor:not-allowed;box-shadow:none}
+.back{background:none;border:0;color:var(--mute);margin-top:16px;cursor:pointer;font-size:14px}.back:hover{color:var(--acc)}
+.msg{color:var(--err);font-size:14px;margin-top:14px;min-height:0}.hint{color:var(--mute);font-size:13px;margin:18px 0 0}
+.lb{display:block;width:100%;margin:12px 0;padding:18px;border-radius:18px;border:0;background:var(--soft);color:var(--ink);font-size:18px;font-weight:600;cursor:pointer;transition:transform .15s,background .25s}.lb:hover{background:var(--line)}.lb:active{transform:scale(.97)}
+.chk{display:flex;gap:14px;align-items:flex-start;width:100%;text-align:left;margin:18px 0 4px;padding:16px;border-radius:18px;border:0;background:var(--soft);color:var(--ink);font-size:15px;cursor:pointer}
+.chk b{flex:none;width:24px;height:24px;border-radius:8px;border:2px solid var(--line);display:grid;place-items:center;color:transparent;transition:all .25s}.chk.on b{background:var(--g);border-color:transparent;color:#fff;animation:pop .35s ease}
+.list{padding-left:20px;margin:10px 0;text-align:left;color:var(--mute)}.list li{margin:10px 0}
+.pg{animation:in .45s cubic-bezier(.2,.8,.2,1) both}.pg.bk{animation-name:inb}.pg.out{animation:out .22s ease forwards}.pg.outb{animation:outb .22s ease forwards}
+@keyframes in{from{opacity:0;transform:translateY(14px) scale(.99)}to{opacity:1;transform:none}}@keyframes inb{from{opacity:0;transform:translateY(-14px) scale(.99)}to{opacity:1;transform:none}}
+@keyframes out{to{opacity:0;transform:translateY(-14px)}}@keyframes outb{to{opacity:0;transform:translateY(14px)}}
+@keyframes pop{40%{transform:scale(1.18)}100%{transform:scale(1)}}.dots button.on,.opt.on{animation:pop .35s ease}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style></head><body>
+<header><div class="bar"><div class="row"><span class="logo">Khảo sát · Survey</span><span class="lang" id="lg"></span></div><div class="prog"><i id="pb"></i></div><div class="pl" id="pl"></div></div></header>
+<main id="app"></main>
+<script>
+const ENDPOINT="https://script.google.com/macros/s/AKfycbyNm5IUC9VMz-BIedozv-fQevbiS7_CD9y2h2MGFbPnJMQgyAGmXkqlV9VzULOt9Bsv/exec"; // tùy chọn: URL Google Apps Script khi tự host
+const $=s=>document.querySelector(s);
+const LK=[["Hoàn toàn không đồng ý","Strongly disagree"],["Hoàn toàn đồng ý","Strongly agree"]];
+const SP=[
+{k:"PJ",ti:["Đánh giá sản phẩm","Product judgment"],def:1,stem:["Sạc dự phòng và củ sạc nhanh sản xuất tại Trung Quốc…","Power banks and fast chargers made in China…"],it:[
+["PJ1","…nhìn chung có chất lượng thấp hơn các sản phẩm tương tự từ các quốc gia khác.","…are generally of a lower quality than similar products available from other countries."],
+["PJ2","…có trình độ công nghệ rất tiên tiến.","…show a very high degree of technological advancement."],
+["PJ3","…thường khá đáng tin cậy và có vẻ bền được đúng như thời gian mong muốn.","…are usually quite reliable and seem to last the desired length of time."],
+["PJ4","…thường là đáng đồng tiền.","…are usually a good value for the money."]]},
+{k:"PI",ti:["Ý định mua","Purchase intention"],stem:["Khi nghĩ đến việc mua sạc dự phòng hoặc củ sạc nhanh sản xuất tại Trung Quốc trên sàn thương mại điện tử…","Thinking about buying a power bank or fast charger made in China through an e-commerce platform…"],it:[
+["PI1","Tôi sẽ cảm thấy có lỗi nếu mua sạc dự phòng hoặc củ sạc nhanh sản xuất tại Trung Quốc.","I would feel guilty if I bought a power bank or fast charger made in China."],
+["PI2","Tôi sẽ không bao giờ mua sạc dự phòng hoặc củ sạc nhanh sản xuất tại Trung Quốc.","I would never buy a power bank or fast charger made in China."],
+["PI3","Bất cứ khi nào có thể, tôi tránh mua sạc dự phòng hoặc củ sạc nhanh sản xuất tại Trung Quốc.","Whenever possible, I avoid buying power banks or fast chargers made in China."],
+["PI4","Khi có sẵn, tôi muốn mua sạc dự phòng hoặc củ sạc nhanh sản xuất tại Việt Nam hơn.","Whenever available, I would prefer to buy power banks or fast chargers made in Vietnam."],
+["PI5","Tôi không thích ý tưởng sử dụng sạc dự phòng hoặc củ sạc nhanh sản xuất tại Trung Quốc.","I do not like the idea of using a power bank or fast charger made in China."]]},
+{k:"INV",bip:1,ti:["Mức độ quan tâm sản phẩm","Product involvement"],stem:["Đối với tôi, sạc dự phòng và củ sạc nhanh là…","To me, power banks and fast chargers are…"],it:[
+["INV1","quan trọng","không quan trọng","important","unimportant"],["INV2","liên quan đến tôi","không liên quan đến tôi","relevant","irrelevant"],
+["INV3","không có ý nghĩa gì với tôi","có ý nghĩa rất lớn với tôi","means nothing to me","means a lot to me"],["INV4","vô giá trị","có giá trị","worthless","valuable"],["INV5","không cần thiết","cần thiết","not needed","needed"]]},
+{k:"TR",ti:["Niềm tin vào người bán","Trust in sellers"],stem:["Những người bán sạc dự phòng và củ sạc nhanh sản xuất tại Trung Quốc trên nền tảng tôi dùng nhiều nhất…","Sellers who sell power banks and fast chargers made in China on the platform I use most…"],it:[
+["TR1","…có năng lực và làm việc hiệu quả trong việc cung cấp sạc dự phòng và củ sạc nhanh.","…are competent and effective in providing power banks and fast chargers."],
+["TR2","…sẽ hành động vì lợi ích tốt nhất của tôi.","…would act in my best interest."],["TR3","…trung thực trong giao dịch với tôi.","…are truthful in their dealings with me."]]},
+{k:"PC",ti:["Nhạy cảm về giá","Price consciousness"],it:[
+["PC1","Tôi sẵn sàng bỏ thêm công sức để tìm mức giá thấp hơn cho sạc dự phòng hoặc củ sạc nhanh.","I am willing to go to extra effort to find a lower price for a power bank or fast charger."],
+["PC2","Tôi sẽ mua sắm ở nhiều hơn một cửa hàng hoặc nền tảng để tận dụng giá thấp của sạc dự phòng và củ sạc nhanh.","I will shop at more than one shop or platform to take advantage of low prices on power banks and fast chargers."],
+["PC3","Số tiền tiết kiệm được nhờ tìm được giá thấp cho các sản phẩm này xứng đáng với thời gian và công sức bỏ ra.","The money saved by finding a low price for these products is worth the time and effort."]]},
+{k:"CET",ti:["Quan điểm về hàng ngoại","Views on foreign products"],it:[
+["CET1","Hàng Việt Nam là trước hết, trên hết và quan trọng nhất.","Vietnamese products, first, last, and foremost."],
+["CET2","Mua hàng sản xuất ở nước ngoài là không phù hợp với tinh thần người Việt Nam.","Purchasing foreign-made products is un-Vietnamese."],
+["CET3","Mua hàng ngoại là không đúng, vì làm người Việt Nam mất việc làm.","It is not right to purchase foreign products, because it puts Vietnamese out of jobs."],
+["CET4","Chúng ta nên mua hàng sản xuất tại Việt Nam thay vì để các nước khác làm giàu từ chúng ta.","We should purchase products manufactured in Vietnam instead of letting other countries get rich off us."],
+["CET5","Chúng ta chỉ nên mua từ nước ngoài những sản phẩm mà trong nước không có.","We should buy from foreign countries only those products that we cannot obtain within our own country."],
+["AC1","Với câu này, vui lòng chọn mức 6 trên thang đo.","For this item, please select 6 on the scale."],
+["CET6","Người tiêu dùng Việt Nam mua hàng sản xuất ở nước ngoài phải chịu trách nhiệm khi làm đồng bào của mình mất việc.","Vietnamese consumers who purchase products made in other countries are responsible for putting their fellow Vietnamese out of work."],
+["CET7","Chỉ nên nhập khẩu những sản phẩm mà Việt Nam không có.","Only those products that are unavailable in Vietnam should be imported."],
+["CET8","Người Việt Nam đích thực luôn nên mua hàng sản xuất tại Việt Nam.","A real Vietnamese should always buy Vietnamese-made products."],
+["CET9","Người Việt Nam không nên mua hàng ngoại, vì điều này gây hại cho doanh nghiệp Việt Nam và gây ra thất nghiệp.","Vietnamese should not buy foreign products, because this hurts Vietnamese business and causes unemployment."],
+["CET10","Về lâu dài tôi có thể phải trả giá nhiều hơn, nhưng tôi vẫn thích ủng hộ hàng Việt Nam.","It may cost me in the long run but I prefer to support Vietnamese products."]]},
+{k:"WAN",ti:["Cảm nhận về Trung Quốc (1)","Feelings about China (1)"],it:[
+["WAN1","Tôi cảm thấy tức giận đối với người Trung Quốc.","I feel angry toward the Chinese."],
+["WAN2","Tôi sẽ không bao giờ tha thứ cho Trung Quốc về những hành động của họ ở Biển Đông.","I will never forgive China for its actions in the South China Sea."],
+["WAN3","Trung Quốc phải trả giá cho những gì họ đã gây ra cho Việt Nam ở Biển Đông.","China should pay for what it has done to Vietnam in the South China Sea."],
+["WAN4","Tôi không ưa người Trung Quốc.","I dislike the Chinese."]]},
+{k:"EAN",ti:["Cảm nhận về Trung Quốc (2)","Feelings about China (2)"],it:[
+["EAN1","Trung Quốc không phải là đối tác thương mại đáng tin cậy.","China is not a reliable trading partner."],
+["EAN2","Trung Quốc muốn giành quyền lực kinh tế đối với Việt Nam.","China wants to gain economic power over Vietnam."],
+["EAN3","Trung Quốc đang lợi dụng Việt Nam.","China is taking advantage of Vietnam."],
+["AC2","Với phát biểu này, vui lòng chọn “Hoàn toàn không đồng ý”.","For this statement, please select “Strongly disagree”."],
+["EAN4","Trung Quốc có ảnh hưởng kinh tế quá lớn ở Việt Nam.","China has too much economic influence in Vietnam."],
+["EAN5","Người Trung Quốc đang làm ăn không công bằng với Việt Nam.","The Chinese are doing business unfairly with Vietnam."]]}];
+const EXT=[["EXP","Bạn đã mua sạc dự phòng hoặc củ sạc nhanh sản xuất tại Trung Quốc trên sàn thương mại điện tử bao nhiêu lần?","How many times have you bought a power bank or fast charger made in China through an e-commerce platform?",[["0","Chưa bao giờ","Never"],["1","1 lần","Once"],["2","2–3 lần","2–3 times"],["4","Từ 4 lần trở lên","4 or more"]]],
+["SLOC","Người bán sạc dự phòng và củ sạc nhanh mà bạn thường mua (hoặc sẽ mua) trên sàn thương mại điện tử có trụ sở ở đâu?","Where is the seller of the power bank or fast charger you usually buy (or would buy) on e-commerce platforms based?",[["vn","Việt Nam","Vietnam"],["ab","Nước ngoài","Abroad"],["both","Cả hai","Both"],["dk","Tôi không biết","I do not know"]]],
+["ORIG","Bạn có biết sạc dự phòng và củ sạc nhanh mà bạn thường mua (hoặc sẽ mua) được sản xuất ở đâu không?","Do you know where the power bank or fast charger you usually buy (or would buy) is made?",[["y","Có, tôi biết","Yes, I know"],["g","Tôi đoán được","I have a rough idea"],["n","Không","No"]]]];
+
+
+
+const DEF=["Trong khảo sát này, “sản phẩm Trung Quốc” là sạc dự phòng và củ sạc nhanh <b>sản xuất tại Trung Quốc</b>, mua qua sàn thương mại điện tử (người bán có thể ở Việt Nam hoặc nước ngoài).","In this survey, “Chinese products” means power banks and fast chargers <b>made in China</b>, bought through e-commerce platforms (the seller may be in Vietnam or abroad)."];
+const F=[];SP.forEach(p=>p.it.forEach(i=>F.push({t:p.bip?"inv":"lk",p,i})));EXT.forEach(q=>F.push({t:"ch",i:q}));
+const N=F.length;
+let S={lang:"vi",step:0,a:{},t0:Date.now(),busy:0};
+try{const o=JSON.parse(localStorage.getItem("svy2"));if(o&&o.step<=N+2)S=Object.assign(S,o,{busy:0})}catch(e){}
+if(S.lang=="both")S.lang="vi";
+const save=()=>{try{localStorage.setItem("svy2",JSON.stringify(S))}catch(e){}};
+const tx=(v,e)=>S.lang=="vi"?v:S.lang=="en"?e:`${v}<span class="en">${e}</span>`;
+const dots=id=>`<div class="dots">${[1,2,3,4,5,6,7].map(n=>`<button data-q="${id}" data-v="${n}" class="${S.a[id]==n?"on":""}">${n}</button>`).join("")}</div>`;
+function qbody(f){
+ const i=f.i,p=f.p;let h=`<div class="tag">${p?tx(p.ti[0],p.ti[1]):tx("Câu hỏi cuối","Last questions")}</div>`;
+
+ if(p&&p.stem)h+=`<div class="stem">${tx(p.stem[0],p.stem[1])}</div>`;
+ if(f.t=="ch")return h+`<p class="bq">${tx(i[1],i[2])}</p>`+i[3].map(o=>`<button class="opt ${S.a[i[0]]==o[0]?"on":""}" data-q="${i[0]}" data-v="${o[0]}">${tx(o[1],o[2])}</button>`).join("");
+ if(f.t=="inv")return h+`<div class="bip big"><span>${tx(i[1],i[3])}</span><span>${tx(i[2],i[4])}</span></div>`+dots(i[0]);
+ return h+`<p class="bq">${tx(i[1],i[2])}</p>`+dots(i[0])+`<div class="anc" style="margin-top:10px"><span>1 = ${tx(LK[0][0],LK[0][1])}</span><span>7 = ${tx(LK[1][0],LK[1][1])}</span></div>`;
+}
+function view(d){
+ const s=S.step,q=s>=3&&s<=N+2;let h="";
+ $("#lg").innerHTML=s>0?[["vi","VI"],["en","EN"]].map(l=>`<button data-l="${l[0]}" class="${S.lang==l[0]?"on":""}">${l[1]}</button>`).join(""):"";
+ $("#pb").style.width=(s>N+2?100:q?(s-3)/N*100:0)+"%";
+ $("#pl").textContent=q?(S.lang=="en"?"Question ":"Câu ")+(s-2)+"/"+N:"";
+ if(s==0)h=`<h1>Chọn ngôn ngữ<span class="en">Choose your language</span></h1><button class="lb" data-l="vi" data-go="1">Tiếng Việt</button><button class="lb" data-l="en" data-go="1">English</button>`;
+ else if(s==1)h=`<h1>${tx("Xin chào bạn!","Hello there!")}</h1><p>${tx("Cảm ơn bạn đã dành thời gian cho khảo sát này. Nghiên cứu tìm hiểu cách <b>chủ nghĩa dân tộc tiêu dùng</b>, <b>thái độ thù địch tiêu dùng</b> và <b>đánh giá sản phẩm</b> ảnh hưởng đến <b>ý định mua sạc dự phòng, củ sạc nhanh sản xuất tại Trung Quốc</b> trên sàn thương mại điện tử của người tiêu dùng Việt Nam.","Thank you for taking the time to join this survey. The study examines how <b>consumer ethnocentrism</b>, <b>consumer animosity</b> and <b>product judgment</b> shape Vietnamese consumers’ <b>intention to buy power banks and fast chargers made in China</b> on e-commerce platforms.")}</p>
+ <div class="who"><p><b>${tx("Người thực hiện","Researcher")}:</b> ${tx("Lã Bảo Khanh, sinh viên Trường Đại học Quốc tế – ĐHQG TP.HCM","La Bao Khanh, student at International University – VNU-HCM")}</p><p><b>${tx("Giảng viên hướng dẫn","Supervisor")}:</b> ${tx("PGS.TS Nguyễn Như Tỷ – School of Business, IU-VNU","Assoc. Prof. Dr. Nguyen Nhu Ty – School of Business, IU-VNU")}</p></div>
+ <div class="note">${tx(DEF[0],DEF[1])}</div>
+ <div class="pills"><span>${tx("khoảng 8–10 phút","about 8–10 minutes")}</span><span>${tx("mỗi trang một câu","one question per page")}</span><span>${tx("bảo mật","confidential")}</span></div>
+ <button class="go" data-go="1">${tx("Tiếp theo","Next")}</button>`;
+ else if(s==2)h=`<h2>${tx("Bảo mật thông tin & đồng ý tham gia","Privacy & consent")}</h2><ul class="list"><li>${tx("Khảo sát <b>không hỏi họ tên, email hay thông tin liên hệ</b> của bạn.","The survey <b>does not ask for your name, email or contact details</b>.")}</li><li>${tx("Câu trả lời <b>chỉ dùng cho nghiên cứu học thuật</b> và được tổng hợp, không công bố riêng lẻ.","Answers are <b>used for academic research only</b> and reported in aggregate, never individually.")}</li><li>${tx("<b>Không có câu trả lời đúng hay sai</b>; bạn chọn mức đúng nhất với suy nghĩ của mình.","<b>There are no right or wrong answers</b>; choose what best matches your view.")}</li><li>${tx("Mọi câu hỏi đều bắt buộc. Việc tham gia <b>hoàn toàn tự nguyện</b> và bạn có thể dừng bất cứ lúc nào.","All questions are required. Taking part is <b>entirely voluntary</b> and you may stop at any time.")}</li></ul>
+ <button class="chk ${S.c?"on":""}" data-c="1"><b>✓</b><span>${tx("Tôi đã đọc, hiểu và đồng ý tham gia khảo sát này.","I have read, understood and agree to take part in this survey.")}</span></button>
+ <button class="go" id="ok" data-go="1" ${S.c?"":"disabled"}>${tx("Bắt đầu khảo sát","Start the survey")}</button><button class="back" data-no="1">${tx("Tôi không tham gia","I do not want to take part")}</button>`;
+ else if(q){const f=F[s-3],id=f.i[0],last=s==N+2;h=qbody(f)+`<div class="msg" id="mg"></div>`+(last?`<button class="go" id="nx" data-go="1" ${S.a[id]==null?"disabled":""}>${tx("Gửi câu trả lời","Submit")}</button>`:S.a[id]!=null?`<p class="hint">${tx("Chạm lại đáp án để đi tiếp","Tap your answer again to continue")}</p>`:"")}
+ else h=done();
+ if(s>=1&&s<=N+2)h+=`<button class="back" data-go="-1">← ${tx("Quay lại","Back")}</button>`;
+ $("#app").innerHTML=`<div class="pg ${d<0?"bk":""}" id="pg">${h}</div>`;
+}
+function done(){if(S.out)return `<h2>${tx("Cảm ơn bạn!","Thank you!")}</h2><p>${tx("Bạn đã chọn không tham gia. Cảm ơn bạn đã quan tâm.","You chose not to take part. Thank you for your interest.")}</p>`;return `<h1>${tx("Cảm ơn bạn!","Thank you!")}</h1><p>${tx("Câu trả lời của bạn rất có giá trị với nghiên cứu.","Your answers are very valuable for this research.")}</p>`+
+ (S.ok?"":`<div class="note">${tx("Câu trả lời chưa được gửi lên hệ thống. Bạn hãy tải file bên dưới và gửi lại cho nhóm nghiên cứu nhé.","Your answers could not be sent to the server. Please download the file below and send it to the research team.")}</div><button class="go" data-dl="1">${tx("Tải câu trả lời","Download answers")}</button>`)}
+async function submit(){
+ const id=(crypto.randomUUID?crypto.randomUUID():Date.now()+""+Math.random().toString(36).slice(2));
+ S.rec=Object.assign({id,lang:S.lang,submittedAt:new Date().toISOString(),durationSec:Math.round((Date.now()-S.t0)/1000),AC1_pass:S.a.AC1==6,AC2_pass:S.a.AC2==1},S.a);
+ let ok=false;const to=new Promise((_,r)=>setTimeout(r,10000));
+ try{if(ENDPOINT){await fetch(ENDPOINT,{method:"POST",mode:"no-cors",body:JSON.stringify(S.rec)});ok=true}}catch(e){}
+ if(!ok)try{const db=await Promise.race([window.claude&&claude.use?claude.use("db"):null,to]);const us=await claude.use("user"),uid=us&&await us.id();if(db&&uid){await Promise.race([db.doc("responses/"+uid+"/items/"+id).set(S.rec),to]);ok=true}}catch(e){}
+ S.ok=ok;S.step=N+3;try{localStorage.removeItem("svy2")}catch(e){}view(1);scrollTo(0,0);
+}
+async function dl(){try{const d=await claude.use("downloads");const k=Object.keys(S.rec);await d.save({filename:"tra-loi-khao-sat.csv",data:k.join(",")+"\n"+k.map(x=>'"'+String(S.rec[x]).replace(/"/g,'""')+'"').join(",")})}catch(e){}}
+function go(d){
+ if(S.busy)return;
+ if(d>0&&S.step>=3&&S.step<=N+2&&S.a[F[S.step-3].i[0]]==null){$("#mg").textContent=S.lang=="en"?"Please answer this question to continue.":"Bạn hãy trả lời câu này để tiếp tục nhé.";return}
+ if(d>0&&S.step==N+2){S.busy=1;submit();return}
+ S.busy=1;$("#pg").classList.add(d>0?"out":"outb");
+ setTimeout(()=>{S.step+=d;S.busy=0;save();view(d);scrollTo(0,0)},220);
+}
+document.addEventListener("click",e=>{
+ const b=e.target.closest("button");if(!b)return;
+ if(b.dataset.l){S.lang=b.dataset.l;save();if(!b.dataset.go){view(0);return}}
+ if(b.dataset.dl){dl();return}
+ if(b.dataset.c){S.c=!S.c;b.classList.toggle("on",S.c);$("#ok").disabled=!S.c;save();return}
+ if(b.dataset.no){S.out=1;S.step=N+3;view(1);return}
+ if(b.dataset.q){if(S.busy)return;const q=b.dataset.q,v=b.dataset.v,n=b.parentNode.className=="dots";S.a[q]=n?+v:v;
+  b.parentNode.querySelectorAll("button").forEach(x=>x.classList.toggle("on",x==b));save();
+  const nx=$("#nx");if(nx)nx.disabled=false;const m=$("#mg");if(m)m.textContent="";
+  if(S.step<N+2)setTimeout(()=>{if(S.step>=3&&F[S.step-3].i[0]==q)go(1)},480);return}
+ if(b.dataset.go)go(+b.dataset.go);
+});
+view(1);
+</script></body></html>
